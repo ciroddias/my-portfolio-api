@@ -12,25 +12,29 @@ export class Transaction {
     ticker: string;
 
     @Column()
-    quantity: string;
+    quantity: number;
 
     @Column('money')
     price: number;
 
     @Column()
-    date: string
+    date?: Date;
 
     @ManyToOne(() => User, (user) => user.transactions)
     @JoinColumn()
-    user: User
+    user: User;
 
     @ManyToMany(() => Asset, (asset) => asset.transactions)
     @JoinColumn()
-    assets: Asset[]
+    assets: Asset[];
 
     constructor() {
         if (!this.id) {
             this.id = uuidV4();
+        }
+
+        if (!this.date) {
+            this.date = new Date();
         }
     }
 }

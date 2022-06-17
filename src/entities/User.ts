@@ -9,7 +9,7 @@ export class User {
     id?: string
 
     @Column()
-    full_name: string;
+    name: string;
 
     @Column()
     email: string;
@@ -19,11 +19,11 @@ export class User {
 
     @OneToMany(() => Transaction, (transaction) => transaction.user)
     @JoinColumn()
-    transactions: Transaction[];
+    transactions?: Transaction[];
 
     @OneToMany(() => Asset, (asset) => asset.user)
     @JoinColumn()
-    assets: Asset[];
+    assets?: Asset[];
 
     constructor() {
         if (!this.id) {
