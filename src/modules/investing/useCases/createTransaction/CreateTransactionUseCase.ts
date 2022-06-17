@@ -1,6 +1,6 @@
-import { Asset } from "../entities/Asset";
-import { User } from "../entities/User";
-import { ITransactionsRepository } from "../repositories/ITransactionsRepository";
+import { Asset } from "../../entities/Asset";
+import { User } from "../../entities/User";
+import { ITransactionsRepository } from "../../repositories/ITransactionsRepository";
 
 interface IRequest {
     ticker: string;
@@ -11,7 +11,7 @@ interface IRequest {
     asset: Asset
 }
 
-class CreateTransactionService {
+class CreateTransactionUseCase {
     constructor(private transactionRepository: ITransactionsRepository){}
 
     execute({ ticker, quantity, price, date, user, asset }: IRequest): void {
@@ -19,4 +19,4 @@ class CreateTransactionService {
     }
 }
 
-export { CreateTransactionService }
+export { CreateTransactionUseCase }

@@ -1,23 +1,16 @@
-import { response, Router } from "express";
-import { UsersRepository } from "../repositories/UsersRepository";
-import { CreateUserService } from "../services/CreateUserService";
+import { Router } from "express";
+
+import { createUserController } from "../modules/investing/useCases/createUser";
+import { listUsersController } from "../modules/investing/useCases/listUsers";
 
 const usersRoutes = Router();
-const usersRepository = new UsersRepository()
 
 usersRoutes.post("/", (req, res) => {
-    const {name, email, password} = req.body;
-
-    const createUserService = new CreateUserService(usersRepository)
-    createUserService.execute({ name, email, password })
-
-    return response.status(201).json({ })
+    return createUserController.handle(req, res)
 })
 
 usersRoutes.get("/", (req, res) => {
-    const users = usersRepository.list()
-
-    return res.status(200).json(users)
+    return listUsersController.handle(req, res)
 })
 
 export { usersRoutes }
