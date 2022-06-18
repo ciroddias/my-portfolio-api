@@ -1,34 +1,32 @@
+import { Repository } from "typeorm";
+import { AppDataSource } from "../../../../database";
 import { User } from "../../entities/User"
 import { ICreateUserDTO, IUsersRepository } from "../IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
+    private repository: Repository<User>;
 
-    private static INSTANCE: UsersRepository; 
-
-    private constructor(){}
-
-    public static getInstance(): UsersRepository {
-        if (!UsersRepository.INSTANCE){
-            UsersRepository.INSTANCE = new UsersRepository()
-        }
-
-        return UsersRepository.INSTANCE;
+    constructor(){
+        this.repository = AppDataSource.getRepository(User)
     }
-
-    create({name, email, password, transactions, assets}: ICreateUserDTO): void {
-        const user = new User();
-
-        Object.assign(user, {
+ 
+    async create({name, email, password, transactions, assets}: ICreateUserDTO): Promise<void> {
+        const user = this.repository.create({
             name, email, password, transactions, assets
-        })
+        });
+
+        await this.repository.save(user)
     }
 
-    list(): User[] {
-        return []
+    async list(): Promise<User[]> {
+        const users = await this.repository.find()
+        return users
     }
 
-    findByEmail(email: string): User {
-        return {name: "name", email: "email", password: "pass"};
+    async findByEmail(email: string): Promise<User> {
+        const user = await this.repository.findOneBy({ email })
+
+        return user;
     }  
 }
 

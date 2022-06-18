@@ -1,4 +1,8 @@
 import { DataSource } from "typeorm"
+import { Asset } from "../modules/investing/entities/Asset"
+import { Transaction } from "../modules/investing/entities/Transaction"
+import { User } from "../modules/investing/entities/User"
+import { CreateUsers1655484867420 } from "./migrations/1655484867420-CreateUsers"
 
 const AppDataSource = new DataSource({
     type: 'postgres',
@@ -8,12 +12,12 @@ const AppDataSource = new DataSource({
     password: process.env.TYPEORM_PASSWORD,
     database: process.env.TYPEORM_DATABASE,
     entities: [
-        "src/app/entities/*.ts"
+        Asset,
+        Transaction,
+        User
     ],
     synchronize: true,
-    migrations: [
-        "src/database/migrations/*.ts"
-    ],
+    migrations: [CreateUsers1655484867420],
 })
 
 AppDataSource.initialize()
@@ -23,3 +27,5 @@ AppDataSource.initialize()
     .catch((err) => {
         console.error("Error during Data Source initialization", err)
     })
+
+export { AppDataSource }

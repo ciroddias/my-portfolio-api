@@ -1,8 +1,6 @@
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
-
-
 class ListUsersUseCase {
     constructor(private usersRepository: IUsersRepository){}
 

@@ -6,7 +6,7 @@ import { transactionsRoutes } from './transactions.routes';
 const router = Router()
 
 router.use("/assets", assetsRoutes)
-router.use("/routes", usersRoutes)
+router.use("/users", usersRoutes)
 router.use("/transactions", transactionsRoutes)
 
 export { router }
