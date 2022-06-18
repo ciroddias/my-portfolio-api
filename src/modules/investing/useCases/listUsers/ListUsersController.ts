@@ -4,8 +4,8 @@ import { ListUsersUseCase } from "./ListUsersUseCase"
 class ListUsersController {
     constructor(private listUsersUseCase: ListUsersUseCase){}
 
-    handle(req: Request, res: Response): Response {
-        const users = this.listUsersUseCase.execute()
+    async handle(req: Request, res: Response): Promise<Response> {
+        const users = await this.listUsersUseCase.execute()
 
         return res.status(200).json(users)
     }
