@@ -1,6 +1,5 @@
 import { Transaction } from "../../entities/Transaction";
 import { ICreateTransactionDTO, ITransactionsRepository } from "../ITransactionsRepository";
-import { UsersRepository } from "./UsersRepository";
 
 class TransactionsRepository implements ITransactionsRepository {
 

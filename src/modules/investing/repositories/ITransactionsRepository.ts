@@ -12,9 +12,9 @@ interface ICreateTransactionDTO {
 }
 
 interface ITransactionsRepository {
+    create({ ticker, quantity, price, date, user, asset }: ICreateTransactionDTO): void;
     findById(id: string): Transaction;
     list(): Transaction[];
-    create({ ticker, quantity, price, date, user, asset }: ICreateTransactionDTO): void;
 }
 
 export { ITransactionsRepository, ICreateTransactionDTO }
