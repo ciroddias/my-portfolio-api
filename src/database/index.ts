@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm"
 import { Asset } from "../modules/investing/entities/Asset"
 import { Transaction } from "../modules/investing/entities/Transaction"
-import { User } from "../modules/investing/entities/User"
+import { User } from "../modules/accounts/entities/User"
 import { CreateUsers1655484867420 } from "./migrations/1655484867420-CreateUsers"
 
 const AppDataSource = new DataSource({

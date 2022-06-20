@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from 'uuid';
-import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm';
-import { Transaction } from './Transaction';
-import { Asset } from './Asset';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm';
+import { Transaction } from '../../investing/entities/Transaction';
+import { Asset } from '../../investing/entities/Asset';
 
 @Entity('users')
 export class User {
@@ -24,6 +24,9 @@ export class User {
     @OneToMany(() => Asset, (asset) => asset.user)
     @JoinColumn()
     assets?: Asset[];
+
+    @CreateDateColumn()
+    created_at: Date;
 
     constructor() {
         if (!this.id) {

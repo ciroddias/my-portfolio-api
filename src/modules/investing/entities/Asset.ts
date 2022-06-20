@@ -1,6 +1,6 @@
 import { v4 as uuidV4 } from 'uuid';
 import { Column, Entity, JoinColumn, ManyToOne, ManyToMany, PrimaryColumn } from 'typeorm';
-import { User } from './User';
+import { User } from '../../accounts/entities/User';
 import { Transaction } from './Transaction';
 
 @Entity("assets")

@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { CreateUserController } from "../modules/investing/useCases/createUser/CreateUserController";
-import listUsersController from "../modules/investing/useCases/listUsers";
-import findUserByEmailController from "../modules/investing/useCases/findUserByEmail"
+import { CreateUserController } from "../modules/accounts/useCases/createUser/CreateUserController";
+import listUsersController from "../modules/accounts/useCases/listUsers";
+import findUserByEmailController from "../modules/accounts/useCases/findUserByEmail"
 
 const usersRoutes = Router();
 

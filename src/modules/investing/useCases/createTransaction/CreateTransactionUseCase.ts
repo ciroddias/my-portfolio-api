@@ -1,5 +1,5 @@
 import { Asset } from "../../entities/Asset";
-import { User } from "../../entities/User";
+import { User } from "../../../accounts/entities/User";
 import { ITransactionsRepository } from "../../repositories/ITransactionsRepository";
 
 interface IRequest {

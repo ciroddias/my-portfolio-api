@@ -1,6 +1,6 @@
 import { container } from "tsyringe";
-import { IUsersRepository } from "../../modules/investing/repositories/IUsersRepository"
-import { UsersRepository } from "../../modules/investing/repositories/implementations/UsersRepository"
+import { IUsersRepository } from "../../modules/accounts/repositories/IUsersRepository"
+import { UsersRepository } from "../../modules/accounts/repositories/implementations/UsersRepository"
 
 container.registerSingleton<IUsersRepository>(
     "UsersRepository", 

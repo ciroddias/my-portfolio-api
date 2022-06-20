@@ -1,6 +1,6 @@
 import { Asset } from "../entities/Asset";
 import { Transaction } from "../entities/Transaction";
-import { User } from "../entities/User";
+import { User } from "../../accounts/entities/User";
 
 interface ICreateTransactionDTO {
     ticker: string;
