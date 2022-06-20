@@ -1,14 +1,14 @@
 import { Router } from "express";
 
-import createUserController from "../modules/investing/useCases/createUser";
+import { CreateUserController } from "../modules/investing/useCases/createUser/CreateUserController";
 import listUsersController from "../modules/investing/useCases/listUsers";
 import findUserByEmailController from "../modules/investing/useCases/findUserByEmail"
 
 const usersRoutes = Router();
 
-usersRoutes.post("/", (req, res) => {
-    return createUserController().handle(req, res)
-})
+const createUserController = new CreateUserController();
+
+usersRoutes.post("/", createUserController.handle)
 
 usersRoutes.get("/", (req, res) => {
     return listUsersController().handle(req, res)
