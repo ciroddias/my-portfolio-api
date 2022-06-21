@@ -1,3 +1,4 @@
+import { AppError } from "../../../../errors/AppError";
 import { Transaction } from "../../entities/Transaction";
 import { ICreateTransactionDTO, ITransactionsRepository } from "../ITransactionsRepository";
 
@@ -16,15 +17,15 @@ class TransactionsRepository implements ITransactionsRepository {
     }
     
     create({ ticker, quantity, price, date, user, asset }: ICreateTransactionDTO): void {
-        throw new Error("Method not implemented.");
+        throw new AppError("Method not implemented.");
     }
 
     findById(id: string): Transaction {
-        throw new Error("Method not implemented.");
+        throw new AppError("Method not implemented.");
     }
 
     list(): Transaction[] {
-        throw new Error("Method not implemented.");
+        throw new AppError("Method not implemented.");
     }
 
     
