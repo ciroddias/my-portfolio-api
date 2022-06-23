@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import { inject, injectable } from "tsyringe";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { compare } from "bcrypt"
@@ -37,7 +38,7 @@ class AuthenticateUserUseCase {
             throw new AppError("Email or password incorrect!")
         }
 
-        const token = sign({}, process.env.JSONWEBTOKEN_SECRET, {
+        const token = sign({id: user.id}, process.env.JSONWEBTOKEN_SECRET, {
             subject: user.id,
             expiresIn: "1d"
         })
