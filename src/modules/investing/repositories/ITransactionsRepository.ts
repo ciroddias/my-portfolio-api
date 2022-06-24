@@ -3,18 +3,18 @@ import { Transaction } from "../entities/Transaction";
 import { User } from "../../accounts/entities/User";
 
 interface ICreateTransactionDTO {
-    ticker: string;
+    asset: Asset;
     quantity: number;
     price: number;
     date?: Date;
     user: User;
-    asset: Asset;
 }
 
 interface ITransactionsRepository {
-    create({ ticker, quantity, price, date, user, asset }: ICreateTransactionDTO): void;
-    findById(id: string): Transaction;
-    list(): Transaction[];
+    create({ asset, quantity, price, date, user }: ICreateTransactionDTO): Promise<void>;
+    findById(id: string): Promise<Transaction>;
+    list(): Promise<Transaction[]>;
+    listTransactionsByAsset(ticker: string): Promise<Transaction[]>
 }
 
 export { ITransactionsRepository, ICreateTransactionDTO }

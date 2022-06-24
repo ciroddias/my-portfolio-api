@@ -1,18 +1,19 @@
 import { Router } from "express";
-import { TransactionsRepository } from "../modules/investing/repositories/implementations/TransactionsRepository";
-import { createTransactionsController } from "../modules/investing/useCases/createTransaction";
-import { CreateTransactionUseCase } from "../modules/investing/useCases/createTransaction/CreateTransactionUseCase";
+
+import { CreateTransactionController } from "../modules/investing/useCases/createTransaction/CreateTransactionController";
+import { ListTransactionsController } from "../modules/investing/useCases/listTransactions/ListTransactionsController";
+import { ListTransactionsByAssetController } from "../modules/investing/useCases/ListTransactionsByAsset/ListTransactionsByAssetController";
 
 const transactionsRoutes = Router()
 
-transactionsRoutes.post("/", (req, res) => {
-    return createTransactionsController.handle(req, res)
-})
+const createTransactionsController = new CreateTransactionController()
+const listTransactionsController = new ListTransactionsController()
+const listTransactionsByAssetController = new ListTransactionsByAssetController()
 
-transactionsRoutes.get("/", (req, res) => {
-    // const transactions = transactionRepository.list()
+transactionsRoutes.post("/", createTransactionsController.handle)
 
-    // return res.status(200).json(transactions)
-})
+transactionsRoutes.get("/", listTransactionsController.handle)
+
+transactionsRoutes.get("/:ticker", listTransactionsByAssetController.handle)
 
 export { transactionsRoutes }

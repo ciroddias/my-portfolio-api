@@ -1,15 +1,18 @@
 import {Request, Response } from "express";
+import { container } from "tsyringe";
+
 import { CreateTransactionUseCase } from "./CreateTransactionUseCase";
 
 class CreateTransactionController {
-    constructor(private createTransactionUseCase: CreateTransactionUseCase){}
 
-    handle(req: Request, res: Response): Response {
+    async handle(req: Request, res: Response): Promise<Response> {
         const { ticker, quantity, price, date, user, asset } = req.body;
 
-        this.createTransactionUseCase.execute({ ticker, quantity, price, date, user, asset })
+        const createTransactionUseCase = container.resolve(CreateTransactionUseCase)
 
-        return res.status(201)
+        await createTransactionUseCase.execute({ ticker, quantity, price, date, user, asset })
+
+        return res.status(201).send()
     }
 }
 

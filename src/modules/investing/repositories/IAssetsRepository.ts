@@ -7,12 +7,11 @@ interface ICreateAssetDTO {
     sector: string;
     quantity: number;
     value: number;
-    user: User;
-    transactions: Transaction[];
+    userId: string;
 }
 
 interface IAssetsRepository {
-    create({ ticker, sector, quantity, value, user, transactions }: ICreateAssetDTO): void;
+    create({ ticker, sector, quantity, value, userId }: ICreateAssetDTO): Promise<void>;
     findById(id: string): Promise<Asset>;
     list(): Promise<Asset[]>;
 }

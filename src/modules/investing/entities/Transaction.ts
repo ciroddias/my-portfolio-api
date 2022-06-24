@@ -9,9 +9,6 @@ export class Transaction {
     id?: string;
 
     @Column()
-    ticker: string;
-
-    @Column()
     quantity: number;
 
     @Column('money')
@@ -24,9 +21,9 @@ export class Transaction {
     @JoinColumn()
     user: User;
 
-    @ManyToMany(() => Asset, (asset) => asset.transactions)
+    @ManyToOne(() => Asset, (asset) => asset.transactions)
     @JoinColumn()
-    assets: Asset[];
+    asset: Asset;
 
     constructor() {
         if (!this.id) {

@@ -1,5 +1,5 @@
 import { v4 as uuidV4 } from 'uuid';
-import { Column, Entity, JoinColumn, ManyToOne, ManyToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, OneToMany } from 'typeorm';
 import { User } from '../../accounts/entities/User';
 import { Transaction } from './Transaction';
 
@@ -24,7 +24,7 @@ export class Asset {
     @JoinColumn()
     user: User
 
-    @ManyToMany(() => Transaction, (transaction) => transaction.user)
+    @OneToMany(() => Transaction, (transaction) => transaction.user)
     @JoinColumn()
     transactions: Transaction[];
 

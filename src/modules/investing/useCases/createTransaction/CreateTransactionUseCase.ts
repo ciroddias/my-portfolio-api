@@ -1,21 +1,14 @@
-import { Asset } from "../../entities/Asset";
-import { User } from "../../../accounts/entities/User";
-import { ITransactionsRepository } from "../../repositories/ITransactionsRepository";
+import { ICreateTransactionDTO, ITransactionsRepository } from "../../repositories/ITransactionsRepository";
+import { inject, injectable } from "tsyringe";
 
-interface IRequest {
-    ticker: string;
-    quantity: number;
-    price: number;
-    date?: Date;
-    user: User;
-    asset: Asset
-}
-
+@injectable()
 class CreateTransactionUseCase {
-    constructor(private transactionRepository: ITransactionsRepository){}
+    constructor(
+        @inject("TransactionsRepository")
+        private transactionRepository: ITransactionsRepository){}
 
-    execute({ ticker, quantity, price, date, user, asset }: IRequest): void {
-        this.transactionRepository.create({ ticker, quantity, price, date, user, asset })
+    async execute({ ticker, quantity, price, date, user, asset }: ICreateTransactionDTO): Promise<void> {
+        await this.transactionRepository.create({ ticker, quantity, price, date, user, asset })
     }
 }
 

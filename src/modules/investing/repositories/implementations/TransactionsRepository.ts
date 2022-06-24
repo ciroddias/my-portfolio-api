@@ -1,33 +1,41 @@
+import { Repository } from "typeorm";
+import { AppDataSource } from "../../../../database";
 import { AppError } from "../../../../errors/AppError";
+import { Asset } from "../../entities/Asset";
 import { Transaction } from "../../entities/Transaction";
 import { ICreateTransactionDTO, ITransactionsRepository } from "../ITransactionsRepository";
 
 class TransactionsRepository implements ITransactionsRepository {
+    private repository: Repository<Transaction>
 
-    private static INSTANCE: TransactionsRepository;
-
-    private constructor(){}
-
-    public static getInstance(): TransactionsRepository {
-        if (!TransactionsRepository.INSTANCE){
-            TransactionsRepository.INSTANCE = new TransactionsRepository()
-        }
-
-        return TransactionsRepository.INSTANCE;
+    constructor(){
+        this.repository = AppDataSource.getRepository(Transaction)
     }
     
-    create({ ticker, quantity, price, date, user, asset }: ICreateTransactionDTO): void {
-        throw new AppError("Method not implemented.");
+    async create({ quantity, price, date, user, asset }: ICreateTransactionDTO): Promise<void> {
+        const transaction = this.repository.create({
+            quantity, price, date, user, asset,
+        })
+
+        await this.repository.save(transaction)
     }
 
-    findById(id: string): Transaction {
-        throw new AppError("Method not implemented.");
+    async findById(id: string): Promise<Transaction> {
+        const transaction = await this.repository.findOneBy({ id })
+
+        return transaction
     }
 
-    list(): Transaction[] {
-        throw new AppError("Method not implemented.");
+    async list(): Promise<Transaction[]> {
+        const transactions = await this.repository.find()
+        return transactions
     }
 
+    async listTransactionsByAsset(ticker: string): Promise<Transaction[]> {
+        const transactions = await this.repository.findBy({ asset: {ticker} })
+
+        return transactions
+    }
     
 }
 
