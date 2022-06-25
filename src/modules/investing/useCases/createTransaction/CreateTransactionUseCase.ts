@@ -7,8 +7,8 @@ class CreateTransactionUseCase {
         @inject("TransactionsRepository")
         private transactionRepository: ITransactionsRepository){}
 
-    async execute({ ticker, quantity, price, date, user, asset }: ICreateTransactionDTO): Promise<void> {
-        await this.transactionRepository.create({ ticker, quantity, price, date, user, asset })
+    async execute({ quantity, price, date, user, asset }: ICreateTransactionDTO): Promise<void> {
+        await this.transactionRepository.create({ quantity, price, date, user, asset })
     }
 }
 

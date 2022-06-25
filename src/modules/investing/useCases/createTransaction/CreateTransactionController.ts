@@ -10,7 +10,7 @@ class CreateTransactionController {
 
         const createTransactionUseCase = container.resolve(CreateTransactionUseCase)
 
-        await createTransactionUseCase.execute({ ticker, quantity, price, date, user, asset })
+        await createTransactionUseCase.execute({ quantity, price, date, user, asset })
 
         return res.status(201).send()
     }
