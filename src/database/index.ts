@@ -2,7 +2,7 @@ import { DataSource } from "typeorm"
 import { Asset } from "../modules/investing/entities/Asset"
 import { Transaction } from "../modules/investing/entities/Transaction"
 import { User } from "../modules/accounts/entities/User"
-import { CreateUsers1655484867420 } from "./migrations/1655484867420-CreateUsers"
+import { Earnings } from "../modules/investing/entities/Earnings"
 
 const AppDataSource = new DataSource({
     type: 'postgres',
@@ -14,10 +14,11 @@ const AppDataSource = new DataSource({
     entities: [
         Asset,
         Transaction,
-        User
+        User,
+        Earnings
     ],
     synchronize: true,
-    migrations: [CreateUsers1655484867420],
+    migrations: [],
 })
 
 AppDataSource.initialize()

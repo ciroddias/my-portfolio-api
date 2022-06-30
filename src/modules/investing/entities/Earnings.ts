@@ -1,25 +1,22 @@
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import {v4 as uuidV4} from 'uuid';
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
-import { User } from '../../accounts/entities/User';
-import { Asset } from './Asset';
+import { User } from "../../accounts/entities/User";
+import { Asset } from "./Asset";
 
-@Entity("transactions")
-export class Transaction extends BaseEntity {
+@Entity('earnings')
+export class Earnings extends BaseEntity {
     @PrimaryColumn()
-    id?: string;
-
-    @Column()
-    quantity: number;
+    id: string;
 
     @Column('money')
-    price: number;
+    amount: number
 
     @Column()
     date?: Date;
 
     @ManyToOne(
         () => User, 
-        (user) => user.transactions
+        (user) => user.earnings
     )
     @JoinColumn({
         name: 'user_id'
@@ -28,15 +25,12 @@ export class Transaction extends BaseEntity {
 
     @ManyToOne(
         () => Asset, 
-        (asset) => asset.transactions
+        (asset) => asset.earnings
     )
     @JoinColumn({
         name: 'asset_id'
     })
     asset: Asset;
-
-    @CreateDateColumn()
-    created_at: Date;
 
     constructor() {
         super();
