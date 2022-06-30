@@ -7,14 +7,21 @@ import { ICreateTransactionDTO, ITransactionsRepository } from "../ITransactions
 
 class TransactionsRepository implements ITransactionsRepository {
     private repository: Repository<Transaction>
+    private assetRepository: Repository<Asset>
 
     constructor(){
         this.repository = AppDataSource.getRepository(Transaction)
+        this.assetRepository = AppDataSource.getRepository(Asset)
     }
-    
-    async create({ quantity, price, date, user, asset }: ICreateTransactionDTO): Promise<void> {
+       
+    async create({ type, quantity, price, date, user, ticker }: ICreateTransactionDTO): Promise<void> {
+
+        const asset = await this.assetRepository.findOneBy({ ticker })
+
+        if (!asset) throw new AppError('Asset not found', 400)
+
         const transaction = this.repository.create({
-            quantity, price, date, user, asset,
+            type, quantity, price, date, user, asset,
         })
 
         await this.repository.save(transaction)

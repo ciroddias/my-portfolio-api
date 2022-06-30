@@ -3,10 +3,21 @@ import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, M
 import { User } from '../../accounts/entities/User';
 import { Asset } from './Asset';
 
+enum TransactionTypes {
+    purchase = 'purchase',
+    sale = 'sale'
+}
+
 @Entity("transactions")
 export class Transaction extends BaseEntity {
     @PrimaryColumn()
     id?: string;
+
+    @Column({
+        type: "enum",
+        enum: TransactionTypes
+    })
+    type: string;
 
     @Column()
     quantity: number;

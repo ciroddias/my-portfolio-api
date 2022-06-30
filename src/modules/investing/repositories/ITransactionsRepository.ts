@@ -3,7 +3,8 @@ import { Transaction } from "../entities/Transaction";
 import { User } from "../../accounts/entities/User";
 
 interface ICreateTransactionDTO {
-    asset: Asset;
+    type: string;
+    ticker: string;
     quantity: number;
     price: number;
     date?: Date;
@@ -11,7 +12,7 @@ interface ICreateTransactionDTO {
 }
 
 interface ITransactionsRepository {
-    create({ asset, quantity, price, date, user }: ICreateTransactionDTO): Promise<void>;
+    create({ ticker, quantity, price, date, user }: ICreateTransactionDTO): Promise<void>;
     findById(id: string): Promise<Transaction>;
     list(): Promise<Transaction[]>;
     listTransactionsByAsset(ticker: string): Promise<Transaction[]>

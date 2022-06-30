@@ -16,7 +16,7 @@ class AssetsRepository implements IAssetsRepository {
 
     async create({ ticker, sector, quantity, value, userId }: ICreateAssetDTO): Promise<void> {
 
-        const user = await this.userRepository.findOneBy({ id: userId})
+        const user = await this.userRepository.findOneBy({ id: userId })
         
         if (!user) throw new AppError('User not found!', 400)
 
@@ -37,6 +37,11 @@ class AssetsRepository implements IAssetsRepository {
     async findById(id: string): Promise<Asset> {
        const asset = await this.repository.findOneBy({ id })
        return asset
+    }
+
+    async findByTicker(ticker: string): Promise<Asset> {
+        const asset = await this.repository.findOneBy({ ticker })
+        return asset
     }
     
 }
