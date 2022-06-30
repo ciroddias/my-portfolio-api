@@ -13,6 +13,7 @@ interface ICreateAssetDTO {
 interface IAssetsRepository {
     create({ ticker, sector, quantity, value, userId }: ICreateAssetDTO): Promise<void>;
     findById(id: string): Promise<Asset>;
+    findByTicker(ticker: string): Promise<Asset>
     list(): Promise<Asset[]>;
 }
 

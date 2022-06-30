@@ -5,7 +5,7 @@ import { Transaction } from './Transaction';
 import { Earnings } from './Earnings';
 
 export enum AssetTypes {
-    stock = 'stock',
+    STOCK = 'stock',
     FII = 'fii',
     NULL = 'not set'
 }
@@ -31,7 +31,7 @@ export class Asset {
     @Column()
     quantity: number;
 
-    @Column('money')
+    @Column()
     value: number;
 
     @ManyToOne(

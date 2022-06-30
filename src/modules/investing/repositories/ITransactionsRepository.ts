@@ -8,11 +8,11 @@ interface ICreateTransactionDTO {
     quantity: number;
     price: number;
     date?: Date;
-    user: User;
+    userId: string;
 }
 
 interface ITransactionsRepository {
-    create({ ticker, quantity, price, date, user }: ICreateTransactionDTO): Promise<void>;
+    create({ ticker, quantity, price, date, userId }: ICreateTransactionDTO): Promise<void>;
     findById(id: string): Promise<Transaction>;
     list(): Promise<Transaction[]>;
     listTransactionsByAsset(ticker: string): Promise<Transaction[]>

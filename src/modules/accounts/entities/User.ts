@@ -9,6 +9,11 @@ export class User extends BaseEntity {
     @PrimaryColumn()
     id?: string
 
+    @Column({
+        default: 0
+    })
+    patrimony: number
+
     @Column()
     name: string;
 

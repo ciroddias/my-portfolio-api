@@ -3,9 +3,9 @@ import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, M
 import { User } from '../../accounts/entities/User';
 import { Asset } from './Asset';
 
-enum TransactionTypes {
-    purchase = 'purchase',
-    sale = 'sale'
+export enum TransactionTypes {
+    PURCHASE = 'purchase',
+    SALE = 'sale'
 }
 
 @Entity("transactions")
@@ -20,9 +20,12 @@ export class Transaction extends BaseEntity {
     type: string;
 
     @Column()
+    ticker: string;
+
+    @Column()
     quantity: number;
 
-    @Column('money')
+    @Column()
     price: number;
 
     @Column()

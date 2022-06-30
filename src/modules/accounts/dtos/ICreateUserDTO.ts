@@ -5,8 +5,6 @@ interface ICreateUserDTO {
     name: string;
     email: string;
     password: string;
-    transactions?: Transaction[];
-    assets?: Asset[];
 }
 
 export { ICreateUserDTO }

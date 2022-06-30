@@ -8,7 +8,7 @@ export class Earnings extends BaseEntity {
     @PrimaryColumn()
     id: string;
 
-    @Column('money')
+    @Column()
     amount: number
 
     @Column()

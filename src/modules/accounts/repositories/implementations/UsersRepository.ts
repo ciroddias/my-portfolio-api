@@ -11,9 +11,9 @@ class UsersRepository implements IUsersRepository {
         this.repository = AppDataSource.getRepository(User)
     }
  
-    async create({name, email, password, transactions, assets}: ICreateUserDTO): Promise<void> {
+    async create({ name, email, password }: ICreateUserDTO): Promise<void> {
         const user = this.repository.create({
-            name, email, password, transactions, assets
+            name, email, password
         });
 
         await this.repository.save(user);
