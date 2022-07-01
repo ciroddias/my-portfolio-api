@@ -11,9 +11,9 @@ class ListTransactionsByAssetUseCase {
 
     async execute(ticker: string): Promise<Transaction[]> {
 
-        const user = await this.transactionsRepository.listTransactionsByAsset(ticker)
+        const transactions = await this.transactionsRepository.listByAsset(ticker)
 
-        return user
+        return transactions
     }
 }
 

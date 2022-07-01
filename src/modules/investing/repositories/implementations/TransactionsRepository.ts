@@ -48,11 +48,11 @@ class TransactionsRepository implements ITransactionsRepository {
     }
 
     async list(): Promise<Transaction[]> {
-        const transactions = await this.repository.find()
+        const transactions = await this.repository.find({relations: ['user', 'user.assets']})
         return transactions
     }
 
-    async listTransactionsByAsset(ticker: string): Promise<Transaction[]> {
+    async listByAsset(ticker: string): Promise<Transaction[]> {
         const transactions = await this.repository.findBy({ asset: {ticker} })
 
         return transactions

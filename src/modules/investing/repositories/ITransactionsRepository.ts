@@ -15,7 +15,7 @@ interface ITransactionsRepository {
     create({ ticker, quantity, price, date, userId }: ICreateTransactionDTO): Promise<void>;
     findById(id: string): Promise<Transaction>;
     list(): Promise<Transaction[]>;
-    listTransactionsByAsset(ticker: string): Promise<Transaction[]>
+    listByAsset(ticker: string): Promise<Transaction[]>
 }
 
 export { ITransactionsRepository, ICreateTransactionDTO }
